@@ -140,7 +140,6 @@ export class AgensApiService {
       .post(url, JSON.stringify(request), {headers: headers})
       .toPromise()
       .then(res => {
-        //console.log(JSON.stringify( res.json() ));
         return res.json();
       })
       .catch(this.handleError);
