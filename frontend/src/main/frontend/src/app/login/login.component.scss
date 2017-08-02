@@ -1,27 +1,18 @@
-.loginForm_line { width: 100%; max-width: 450px; height: 100%; margin: auto; display: table;
-    
-    div.center { display: table-cell; vertical-align: middle; 
-
-        md-card { padding: 24px; border-radius:28px; 
-
-            div.logo { width: 110px; margin: 30px auto; 
-            
-                img { width: 100%; }
-            
+body { background-color: #3f51b5;  
+    section { width: 100%; max-width: 325px; height: 570px; position: absolute; top: 0; right: 0; bottom: 0; left: 0; margin: auto; 
+        h1 { text-align: center; margin-bottom: 20px; }
+        md-card { margin-bottom: 20px; padding: 60px 20px 20px; 
+            md-input-container { width: 100%; margin-bottom: 12px; 
+                input { font-size: 14px; }
             }
-
-            form { margin: 12px 0; }
-
-            md-placeholder { font-size: 12px; }
-
-            button { margin: 24px 0; padding: 4px; border-radius: 16px; }
-
-            md-hint { right: 0; }
-
+            div {
+                md-checkbox { font-size: 12px; font-weight: 700; color: #666666; }
+                button { width: 100%; display: block; margin: 20px 0; }
+            }
         }
-
+        // a.forgot { display: block; margin-bottom: 10px; text-align: center; color: white; }
+        // span { display: block; text-align: center; color: white; font-size:12px;
+        //     a { display: inline-block; margin-left: 10px; }
+        // }
     }
-
 }
-
-.material-icons { font-size: 18px; line-height: 26px; color: dimgray; }

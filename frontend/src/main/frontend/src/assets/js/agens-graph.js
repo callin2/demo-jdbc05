@@ -511,19 +511,20 @@
     props.vid = makeid();
     if( !props.hasOwnProperty('label') || props.label == "" ) props.label = "none";
 
-    agens.cy.add({
+    var ele = agens.cy.add({
         group: "nodes",
         data: { 'id': props.id, 'name': props.name, 'label': props.label, 'props': props },
         position: { x: agens.graph.cyPosition.x, y: agens.graph.cyPosition.y },
         selectable: true, selected: false, classes: 'user-add'
       });
-    agens.cy.style().selector(`node[id='${props.id}']`)
-      .style({
+    // agens.cy.style().selector(`node[id='${props.id}']`)
+    ele.style({
         'label': 'data(name)',
         'shape': shape, 'width': w, 'height': h, 'background-color': '#'+color,
         'text-valign': 'center', 'text-outline-width': 2, 'text-outline-color': '#888',
         'border-width': 1, 'border-color': '#'+borderColor
-      }).update();
+      });
+    // ele.update();
   };
 
   // public Function: updateNode
@@ -612,10 +613,11 @@
 
     // cxt menu for node, edge
     agens.cy.cxtmenu({
-      selector: 'node, edge',
+      selector: 'node',
       menuRadius: 80,
       fillColor: 'rgba(50, 0, 0, 0.65)',
-      commands: [{
+      commands: [
+        {
           content: '<span style="display:inline-block; width:20px; font-size:10pt">Lock</span>',
           select: function(ele){
             agens.cy.$(`[id='${ele.id()}']`).select();
@@ -636,6 +638,32 @@
                 window['angularComponentRef'].component.getNeighbors(ele.id());
               });
             }
+          }
+        },{
+          content: '<span style="display:inline-block; width:20px; font-size:10pt">remove</span>',
+          select: function(ele){
+            agens.cy.$(`[id='${ele.id()}']`).select();
+            agens.cy.$(":selected").remove();
+          }
+        },{
+          content: '<span style="display:inline-block; width:20px; font-size:10pt">hide</span>',
+          select: function(ele){
+            agens.cy.$(`[id='${ele.id()}']`).select();
+            agens.api.view.hide(agens.cy.$(":selected"));
+          }
+        }
+      ]
+    });
+
+    agens.cy.cxtmenu({
+      selector: 'edge',
+      menuRadius: 80,
+      fillColor: 'rgba(50, 0, 0, 0.65)',
+      commands: [
+        {
+          content: '<span style="display:inline-block; width:20px; font-size:10pt">Property</span>',
+          select: function(ele){
+            agens.dialog.openPropertyBox( ele );
           }
         },{
           content: '<span style="display:inline-block; width:20px; font-size:10pt">remove</span>',

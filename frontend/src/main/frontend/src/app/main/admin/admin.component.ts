@@ -88,8 +88,18 @@ export class AdminComponent implements OnInit, AfterViewInit {
   }
 
   // Table page event
-  onTablePage(pageNumber:number) {
-    console.log(`ngx_datatable: pageNumber=${pageNumber}`);
+  toggleSessionExpandRow(row, col) {
+    // console.log('Toggled Expand Row!', col);
+    row._selectedColumn = col;
+    this.adminSessionsTable.rowDetail.toggleExpandRow(row);
+  }
+  toggleLockExpandRow(row, col) {
+    // console.log('Toggled Expand Row!', col);
+    row._selectedColumn = col;
+    this.adminLocksTable.rowDetail.toggleExpandRow(row);
+  }
+  onRowDetailToggle(event) {
+    // console.log('Detail Toggled', event);   // type=row, value={row}
   }
 
   toggleAddUser(){

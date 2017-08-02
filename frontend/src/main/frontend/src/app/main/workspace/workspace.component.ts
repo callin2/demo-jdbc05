@@ -73,7 +73,7 @@ export class WorkspaceComponent implements OnInit, AfterViewInit {
 
   // Table page event
   onTablePage(pageNumber:number) {
-    console.log(`ngx_datatable: pageNumber=${pageNumber}`);
+    // console.log(`ngx_datatable: pageNumber=${pageNumber}`);
   }
   toggleExpandRow(row) {
     // console.log('Toggled Expand Row!', row);

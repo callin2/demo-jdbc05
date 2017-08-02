@@ -1,158 +1,55 @@
-span.help { position: relative; 
+div.content { padding: 20px; 
 
-        
-        p { 
-                position: absolute; 
-                top: -28px; 
-                left: -220px; 
-                width: 150px; 
-                height: 0; 
-                line-height: 30px; 
-                overflow: hidden; 
-                transition: all 0.2s ease-in-out; 
-                background-color: salmon;
-                color: white; 
-                z-index: -1; 
-                border-radius: 0 0 8px 8px; 
-                box-shadow: lightgrey 1px 1px 1px; 
-                padding: 0 22px; 
-                font-size: 14px; 
-
+        md-card.page_name { margin-bottom: 20px; 
+                &:after { content: ''; display: block; clear: both; }
+                div.main_icon { float: right; 
+                a { display: inline-block; margin-left: 12px; 
+                        &:first-of-type { margin-left: 0; }
+                        md-icon { font-size: 21px; }
+                }
+                }
+                h2 { font-size: 16px; }
         }
 
-        .material-icons { 
-                color: dimgray; 
-                transition: all 0.2s ease-in-out; 
-                cursor: pointer; 
-                margin-right: 8px;
-                transform:rotate(-180deg); 
-                -ms-transform: rotate(-180deg); 
-                -moz-transform: rotate(-180deg); 
-                -webkit-transform: rotate(-180deg);
+        div.user_info { margin-bottom: 20px; 
+                ul { 
+                        &:after { content:''; display: block; clear: both; }
+                        li { width: 24.25%; margin-left: 1%; float: left; 
+                                &:first-child { margin-left: 0; } 
+                                md-card { padding: 0; 
+                                        h3 { font-size: 12px; padding: 3% 4%; color: white; font-weight: 700; 
+                                                md-icon { float: right; color: white; font-size: 17px; }
+                                        }
+                                        p { text-align: right; font-size: 15px; padding: 8% 4% 0; font-weight: 700; 
+                                                small { font-size: 75%; }
+                                        }
+                                        span { color: rgba(0,0,0,0.3); padding: 1% 4% 8%; display: block; text-align: right; font-size: 12px; font-weight: 700; }
+                                } 
+                                .server { h3{background-color: #3f51b5;} p{color: #3f51b5;}}
+                                .database { h3{background-color: #e64a19;} p{color: #e64a19;}}
+                                .username { h3{background-color:#4caf50;} p{color: #4caf50;}}
+                                .email { h3{background-color: #ffa000;} p{color: #ffa000;}}
+                        }
+                }
+                
+        }
 
-                &:hover { color: tomato; 
-                        transform:rotate(0deg); 
-                        -ms-transform: rotate(0deg); 
-                        -moz-transform: rotate(0deg); 
-                        -webkit-transform: rotate(0deg); 
-                        
-                        ~ p { padding: 25px 22px 12px; height: 30px; }
 
+        div.dashboard { width: 33%; margin-right:2%; float: left;
+                md-card {  
+                        h4 { font-weight: 700; border-bottom: 1px solid #edf0f4; padding-bottom: 12px; margin-bottom: 14px; }
+                        md-card-content { height: 350px; }
                 }
         }
 
-}
-
-
-div.user_container { margin-top: 8px; 
-
-        div.user_info {
-        
-                md-card { padding: 18px; border-bottom: 6px solid cornflowerblue; 
-
-                        div { 
-
-                                p { font-size: 12px; }
-                        
-                        }
-
-                        .material-icons { background-color: cornflowerblue; padding: 8px; border-radius: 50%; color: white; }
-
-                }
-
-        }
-
-}
-
-div.dashboard { 
-
-        md-card-content { height: 300px; }
-
-}
-
-div.content { margin: 0 20px; 
-
-        div.edi_head { 
-    
-            h4 { line-height: 37px; } 
-        
-        }
-
-        span.page_title_icon { a { padding: 6px; display: block; 
-        
-                .material-icons { font-size: 20px; }
-        
-        } }
-
-}
-
-
-md-card.notice { margin: 20px 8px; padding: 20px; height: 250px; 
-
-        div.notice_container {
-
-                div#banner{ margin-top: 20px; 
-
-                        input { display: none; }
-                        label { 
-                                width: 35%; 
-                                display: block;
-                                cursor: pointer; 
-                                padding: 12px; 
-                                font-size: 14px; 
-                                transition: all 0.2s ease-in; 
-                                border-bottom: 1px solid lightgray; 
-
-                                p { text-overflow: ellipsis; overflow:hidden; white-space: nowrap; }
-
-                                span { float: right; margin-right: 8px; 
-                                        
-                                        md-icon { font-size: 15px; line-height: 20px; }
-                                        md-icon.r_arrow { display: none; }
-                                       
-                                }        
-                                
-                        }
-
-                        h3 { font-size: 20px; }
-                                
-                        ul#content { width:60%; position: absolute; top: 0; right: 0;  padding: 0; 
-                                > li { display: none; }
-                        }
-
-                        &:after { content:''; display: block; clear:both; }
-
-                        #notice1:checked + label,
-                        #notice2:checked + label,
-                        #notice3:checked + label { background-color: lightsalmon; color: white; box-shadow: lightgrey 3px 2px 1px; }
-
-                        #notice1:checked + label > span md-icon.add { display: none; }
-                        #notice1:checked + label > span md-icon.r_arrow { display: block; } 
-                        #notice2:checked + label > span md-icon.add { display: none; }
-                        #notice2:checked + label > span md-icon.r_arrow { display: block; } 
-                        #notice3:checked + label > span md-icon.add { display: none; }
-                        #notice3:checked + label > span md-icon.r_arrow { display: block; } 
-
-
-                        #notice1:checked ~ #content > li:nth-child(1),
-                        #notice2:checked ~ #content > li:nth-child(2),
-                        #notice3:checked ~ #content > li:nth-child(3) { display: block; }
-
-                        div { 
-                                p { font-size: 14px; }
-                        }
+        div.dash_detail { width: 65%; float: right;  
+                md-card {    
+                        h4 { font-weight: 700; border-bottom: 1px solid #edf0f4; padding-bottom: 12px; margin-bottom: 14px; }
+                        md-card-content { height: 350px; }
                 }
         }
 
-}
-
-div.notice_content { height: 255px; overflow: auto;   
-
-        h3 { color: white; }
-
-        h4 { font-size: 20px; color: coral; margin: 0 20px 20px; }
-        
-        p { margin: 20px 40px; color: gray; }
+        div.dash:after { content:''; display: block; clear: both; }
 
 }
 
@@ -164,4 +61,19 @@ div.notice_content { height: 255px; overflow: auto;
   left: 40%;
   margin: 0 auto;
 //   right: 0;
+}
+
+@media screen and ( max-width: 1024px ) {
+
+        div.user_info ul { margin-bottom: 0; 
+                li { width: 49% !important; margin-left: 0 !important; 
+                        &:nth-last-of-type(even) { margin-right: 2%; margin-bottom: 20px; }
+                }
+        }
+}
+
+@media screen and (max-width: 768px ) {
+        div.dashboard { width: 100% !important; margin-right: 0 !important; margin-bottom: 20px; float: none; }
+        div.dash_detail { width: 100% !important; float: none; }
+
 }

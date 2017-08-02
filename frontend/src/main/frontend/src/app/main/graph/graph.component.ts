@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 import { WindowRefService } from '../../../services/window-ref.service';
 import { AgensApiService } from '../../../services/agens-api.service';
@@ -120,7 +120,7 @@ limit 10
     private winRef: WindowRefService,
     private apiSerivce: AgensApiService,
     private _route : ActivatedRoute,
-    private router : Router,
+    // private router : Router,
     private _ngZone: NgZone
   ) {
     this.window = winRef.nativeWindow;    
@@ -154,7 +154,7 @@ limit 10
       lineNumbers: true,
       matchBrackets : true,
       autofocus: true,
-      theme: 'eclipse'
+      theme: 'eclipse'      
     });
 
     // AgensGraph Factory
@@ -182,8 +182,8 @@ limit 10
   }
 
   onResize(event) {
-    console.log( "window.innerHeight =", window.innerHeight, '<==', this.initWindowHeight );
-    console.log("divAgensGraph.style.height =", this.divAgensGraph.nativeElement.style.height );    
+    // console.log( "window.innerHeight =", window.innerHeight, '<==', this.initWindowHeight );
+    // console.log("divAgensGraph.style.height =", this.divAgensGraph.nativeElement.style.height );    
     if( window.innerHeight < this.initWindowHeight + 10 ) this.graContentHeight = 450;
   }
 
@@ -194,7 +194,7 @@ limit 10
 
   loadDemoData(index){
     if( this.window.agens.graph === undefined || this.graph === undefined ) return;
-    console.log( `load SampleData(${index})` );
+    // console.log( `load SampleData(${index})` );
 
     // for TEST
     this.window.agens.graph.loadData( this.window.agens.graph.demoData[index] );
@@ -228,7 +228,7 @@ limit 10
     if( value !== 'all' && this.setting.nodeSelector != value ){
       this.setting.nodeSelector = value;
       let style = this.loadCyStyles('node.'+value);
-      console.log( "changeNodeSelector()", style);
+      // console.log( "changeNodeSelector()", style);
       if( !!style ) this.setting.nodeStyle = style;
       else this.setting.nodeStyle = {};
     } 
@@ -237,7 +237,7 @@ limit 10
     if( value !== 'all' && this.setting.edgeSelector != value ) {
       this.setting.edgeSelector = value;
       let style = this.loadCyStyles('edge.'+value);
-      console.log( "changeEdgeSelector()", style);
+      // console.log( "changeEdgeSelector()", style);
       if( !!style ) this.setting.edgeStyle = style;
       else this.setting.edgeStyle = {};
     }
@@ -300,7 +300,7 @@ limit 10
     if( this.window.agens.graph === undefined || this.graph === undefined ) return;
     this.selectedLayoutIndex = Number(index);
     let selectedLayout = this.window.agens.graph.layoutTypes[this.selectedLayoutIndex];
-    console.log( "change layout : "+selectedLayout.name );
+    // console.log( "change layout : "+selectedLayout.name );
 
     var layout = this.graph.makeLayout(selectedLayout);
     layout.run();
@@ -375,7 +375,7 @@ limit 10
 
   // Table page event
   onTablePage(pageNumber:number) {
-    console.log(`ngx_datatable: pageNumber=${pageNumber}`);
+    // console.log(`ngx_datatable: pageNumber=${pageNumber}`);
   }
   toggleExpandRow(row, col) {
     // console.log('Toggled Expand Row!', row, col);
@@ -406,6 +406,8 @@ limit 10
     this.projTitle = "";
     this.projDescription = "";
     
+    this.query = " ";
+
     if( !!this.graph ) this.clearGraph();
   }
 
@@ -424,8 +426,6 @@ limit 10
     this.graContentHeight = 800;
 
     let elem = this.el.nativeElement.querySelector('#graphCard');
-    console.log( "FullScreen:", elem.requestFullscreen, elem.webkitRequestFullScreen
-        , elem.mozRequestFullScreen, elem.msRequestFullScreen);
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
     } else if (elem.webkitRequestFullScreen) {
@@ -446,7 +446,7 @@ limit 10
     this.window.agens.api.unre.redo();
   }
   cySelectLabel( labelType, labelName ){
-    console.log(`clicked md-chip: label('${labelType}', '${labelName}')`);
+    // console.log(`clicked md-chip: label('${labelType}', '${labelName}')`);
     this.graph.elements(':selected').unselect();
     this.graph.elements(`${labelType}[label='${labelName}']`).select();
   }
@@ -481,9 +481,6 @@ limit 10
   }
 
   public checkLoadProject(): void {
-    console.log( "checkLoadProject():" );
-    // console.log( this.route.params );
-
     this.route$ = this._route.params.subscribe(
         params => {
           if( params.hasOwnProperty('id') && params.id > 0 ){
@@ -518,12 +515,13 @@ limit 10
 
   // **NOTE: 마우스의 실제 클릭 위치가 canvas와 다를 때, 교정해준다
   cyResize(){
+    this.graph.style( this.window.agens.graph.defaultStyle ).update();
     this.graph.resize();
   }  
 
   // 특정 node의 neighbors 가져오기
   getNeighbors(vid:string){
-    console.log( "component.getNeighbors() is called: vid="+vid );
+    // console.log( "component.getNeighbors() is called: vid="+vid );
     this.apiSerivce.dbNeighbors( vid )
       .then(rows => {
         // console.log(data);

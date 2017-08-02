@@ -1,5 +1,5 @@
 import { Component, ViewChild , OnInit, ElementRef, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 import * as GlobalConfig from '../../global.config';
 import { AgensApiService } from '../../../services/agens-api.service';
@@ -43,14 +43,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   @ViewChild('browserTable') browserTable: DatatableComponent;
 
   constructor(
+    // private router: Router,
     private el: ElementRef,
     private apiSerivce: AgensApiService
-  ) { }
-
-  ngOnInit(){ 
+  ){ 
   }
 
-  ngAfterViewInit(){
+  ngOnInit(){ 
     let user:any = this.apiSerivce.dbUser();
     if (user) {
         if(user.host) this.host = user.host;
@@ -58,11 +57,21 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         if(user.db) this.db = String(user.db).toUpperCase();
         if(user.username) this.username = String(user.username).toUpperCase();
         if(user.email) this.email = user.email;
-        if(user.authorities) this.authorities = user.authorities.join(', ');
+        if(user.authorities){
+          // console.log( "Array.isArray(user.authorities) =", Array.isArray(user.authorities));
+          this.authorities = user.authorities.map( item => {
+            let auth = item.split('_');
+            if( auth.length > 1 ) return auth[1];
+            else return item;
+          }).join(', ');
+        }
     }
 
     // display metaData to treeData
     this.loadMetaData();
+  }
+
+  ngAfterViewInit(){
   }
 
   // call API: db
@@ -147,7 +156,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   // Table page event
   onTablePage(pageNumber:number) {
-    console.log("ngx_datatable: pageNumber="+pageNumber);
+    // console.log("ngx_datatable: pageNumber="+pageNumber);
+  }
+  toggleExpandRow(row, col) {
+    // console.log('Toggled Expand Row!', col);
+    row._selectedColumn = col;
+    this.browserTable.rowDetail.toggleExpandRow(row);
+  }
+  onRowDetailToggle(event) {
+    // console.log('Detail Toggled', event);   // type=row, value={row}
   }
 
 }

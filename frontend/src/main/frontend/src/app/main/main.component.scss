@@ -1,53 +1,68 @@
+md-sidenav-container{ background-color: #edf0f5; 
+        md-sidenav { background-color: white; overflow: hidden; box-shadow: 1px 1px 2px rgba(9,9,9,0.2); 
 
-      
-.material-icons { font-size: 20px; }
+            label { padding: 14px 18px; position: absolute; bottom: 0; cursor: pointer; transition: all 0.3s ease-in-out;  
+                    md-icon { font-size: 24px; color: #686a6d; display: inline-block; vertical-align: middle; padding-bottom: 4px; }
+            }
 
-div.iconnav { 
-
-    a {
-
-        &:first-of-type {
-
-                .material-icons { padding: 43px 18px; }
-
-        }
-
-    }
-       
-   .material-icons { padding: 24px 18px 16px; display: block; color: cadetblue; transition: all 0.3s ease-out;
+            div.sidenav { width: 230px; transition: all 0.2s ease-in-out; overflow: hidden; white-space: nowrap; 
                 
-        &:hover { color: darkslateblue; }
-    
-    }
+                div.wide_side { 
+                    h1 { padding: 17px 20px 20px; background-color: #303f9f; cursor: pointer;
+                        img { width: 100%; max-width: 80px; }
+                    } 
+                    div { padding: 30px 20px; border-bottom: 1px solid #f5f7f9;
+                        &:after { content: ''; display: block; clear: both; }
+                        img { width: 65px; margin-right: 20px; float: left; }
+                        p { font-size: 13px; padding-top: 14px; color: #686a6d; }
+                    }   
+                    ul {
+                        li { border-bottom: 1px solid #f5f7f9;
+                            a { padding: 18px; display: block; color: #686a6d; font-size: 13px; font-weight: 700; transition: all 0.3s ease-in-out;
+                                span { vertical-align: middle; }
+                                md-icon { padding-right: 16px; font-size: 24px; display: inline-block; vertical-align: middle; }
+                                &:hover { background-color: #f5f7f9; }
+                            }
+                        }
+                    }
+                }
+                div.icon_side { display: none; 
+                    h1 { padding: 20px 20px 17px; background-color: #303f9f; cursor: pointer;
+                        img { width: 22px; }
+                    } 
+                    p { padding: 46px 0 43px; font-size:12px; color: #686a6d; text-align: center; border-bottom: 1px solid #f5f7f9 }
+                    ul {
+                        li { border-bottom: 1px solid #f5f7f9;
+                            a { padding: 18px; display: block; color: #686a6d; font-size: 13px; font-weight: 700; transition: all 0.3s ease-in-out;
+                                md-icon { font-size: 24px; display: inline-block; vertical-align: middle; }
+                                &:hover { background-color: #f5f7f9; }
+                            }
+                        }
+                    }
+                }
+            }
+        }      
+
+        input { display: none; }
+        input[type="checkbox"]:checked {
+            &~ div.sidenav { width: 60px; 
+                div.wide_side { display: none; }
+                div.icon_side { display: block; }
+            }
+            &~ label { transform:rotate(180deg); } 
+        }   
 
 
-    img { width: 22px; padding: 16px; }
+        div.md-content { background-color: #3f51b5; padding: 18px; 
+
+                    span.menu { float:left; padding: 2px 0; }
+                    ul { float: right; 
+                        li{ display: inline-block; padding: 2px 0; }
+                    }
+                    &:after { content: ''; display: block; clear: both; }
+                    md-icon { color: white; }
+        }
 }
 
-md-sidenav-container {
 
-    md-sidenav { width: 100%; max-width: 250px; border-radius: 0 0 25px 0; 
-    
-        h4 { font-size: 14px; font-weight: 400; }
 
-    }
-
-    div.textnav_header { padding: 24px 24px; 
-
-    }
-
-    div.textnav_con { padding: 20px; cursor: pointer; transition: all 0.5s ease-out;
-
-        &:hover { background-color: sandybrown; color: white;}
-        
-    }
-
-    div.header { padding: 10px 16px; margin: 0 30px; border-radius: 0 0 15px 15px; 
-
-        img { width: 100%; max-width: 85px; }
-    
-        .material-icons { font-size: 22px; }
-
-    }
-
-}

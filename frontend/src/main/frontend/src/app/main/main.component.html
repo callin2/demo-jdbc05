@@ -1,91 +1,76 @@
-<div layout-gt-md="row" layout="column" layout-fill flex >
 
-  <!-- 
-    iconside
-    -->
+        <md-sidenav-container>
+        <md-sidenav id="sidenav" mode="{{navMode}}" opened="{{side}}" #sidenav >
+            
+            <input type="checkbox" id="icon_box">
+            
+            <div class="sidenav">
+                <div class="wide_side">
+                    <h1 (click)="sidenav.toggle()"><img src="../../assets/img/logo_wh_32px.png" alt="logo"></h1>
+                    <div>
+                        <img src="../../assets/img/person.png" alt="person">
+                        <p><strong><small>Welcome to</small><br/>AgensBrowser!</strong></p>
+                    </div>
+                    <ul>
+                        <li><a [routerLink]="['/']"><md-icon>dashboard</md-icon><span>Dashboard</span></a></li>
+                        <li><a [routerLink]="['/graph']"><md-icon>pie_chart</md-icon><span>Graph query</span></a></li>
+                        <li><a [routerLink]="['/workspace']"><md-icon>insert_drive_file</md-icon><span> Workspace</span></a></li>
+                        <li><a [routerLink]="['/admin']"><md-icon>person</md-icon><span>Admin</span></a></li>
+                        <li><a [routerLink]="['/help']"><md-icon>help</md-icon><span>Help</span></a></li>  
+                    </ul>
+                </div>
+                <div class="icon_side">
+                    <h1 (click)="sidenav.toggle()"><img src="../../assets/img/logo_wh_bn.png" alt="logo"></h1>
+                    <p><strong>Agens<br/>Browser</strong></p>
+                    <ul>
+                        <li><a mdTooltip="Dashboard" mdTooltipPosition="after" [routerLink]="['/']"><md-icon>dashboard</md-icon></a></li>
+                        <li><a mdTooltip="Graph-query" mdTooltipPosition="after" [routerLink]="['/graph']"><md-icon>pie_chart</md-icon></a></li>
+                        <li><a mdTooltip="Workspace" mdTooltipPosition="after" [routerLink]="['/workspace']"><md-icon>insert_drive_file</md-icon></a></li>
+                        <li><a mdTooltip="Admin" mdTooltipPosition="after" [routerLink]="['/admin']"><md-icon>person</md-icon></a></li>
+                        <li><a mdTooltip="Help" mdTooltipPosition="after" [routerLink]="['/help']"><md-icon>help</md-icon></a></li>  
+                    </ul>
+                </div>
+            </div>
 
-  <div show-gt-md layout="column" hide class="iconnav md-elevation-z14 z-3">
+            <label for="icon_box"><md-icon>arrow_back</md-icon></label>
+            
+        </md-sidenav>
 
-    <md-list> 
-      <!--<a (click)="sidenav.toggle()" mdTooltip="LIST" mdTooltipPosition="after"><md-icon class="bgc-light-blue-800 tc-grey-50">dehaze</md-icon></a>-->
-      <a mdTooltip="LIST" mdTooltipPosition="after"><md-icon class="bgc-light-blue-800 tc-grey-50">dehaze</md-icon></a>
-      <a [routerLink]="['/']" mdTooltip="DASHBOARD" mdTooltipPosition="after"><md-icon>dashboard</md-icon></a>
-      <a [routerLink]="['/graph']" mdTooltip="GRAPH-QUERY" mdTooltipPosition="after"><md-icon>pie_chart</md-icon></a>
-      <a [routerLink]="['/workspace']" mdTooltip="WORKSPACE" mdTooltipPosition="after"><md-icon>insert_drive_file</md-icon></a>
-      <a [routerLink]="['/admin']" mdTooltip="ADMIN" mdTooltipPosition="after"><md-icon>person</md-icon></a>
-      <a [routerLink]="['/help']" mdTooltip="HELP" mdTooltipPosition="after"><md-icon>help</md-icon></a>  
-    </md-list>
-    <span flex></span>
-    <img src="../../../../assets/img/logo_bn.png">
-  </div>
-  
-  <div layout="column" layout-fill flex>
-
-      <!-- 
-        sidenav
-        -->
-<!--        
-    <md-sidenav-container class="bgc-light-blue-50"> 
-      <md-sidenav #sidenav class="tc-grey-800" 
-        [mode]="(media.registerQuery('gt-sm') | async) ? 'side' : 'over'">
-    
-        <div class="pad-md bgc-light-blue-800 tc-grey-50" (click)="sidenav.close()">            
-            <h3>BITNINE</h3>
-            <p><small>AGENSGRAPH MANAGER</small></p>
+        <div class="md-content">
+            <span class="menu"><a md-icon-button (click)="sidenav.toggle()"><md-icon>menu</md-icon></a></span>
+            <ul>
+<!-- 
+    // **NOTE: Bitnine.net 의 Blog RSS 연결 부분
+    // : Json Plug-in 설치가 안되어 당장은 빼고 진행
+                <li>
+                    <a md-icon-button [mdMenuTriggerFor]="notificationsMenu" mdTooltip="Alram" mdTooltipPosition="before"><md-icon>alarm_on</md-icon></a>
+                    <md-menu #notificationsMenu="mdMenu">
+                            <div td-menu-header class="md-subhead">Notifications</div>
+                            <md-nav-list dense>
+                                <ng-template let-last="last" ngFor [ngForOf]="[0,1,2,3,4,5,6,7,8,9]">
+                                    <a md-list-item>
+                                    <md-icon md-list-avatar>today</md-icon>
+                                    <h4 md-line><span class="text-wrap">A user did an activity on an item that you've subscribed to follow actions on.</span></h4>
+                                    <p md-line>22 minutes ago</p>
+                                    </a>
+                                    <md-divider *ngIf="!last"></md-divider>
+                                </ng-template>
+                            </md-nav-list>
+                    </md-menu>
+                </li>
+-->
+                <li class="logout">
+                    <a md-icon-button mdTooltip="Logout" mdTooltipPosition="before" [routerLink]="('/login')"><md-icon>lock_open</md-icon></a>
+                </li>
+            </ul>
         </div>
-        <md-divider></md-divider>             
-        <ng-template let-item let-last="last" ngFor [ngForOf]="routes">
-          <div class="textnav_con" (click)="routeSub(item.route,item.title)" layout="row">          
-            <h4 class="pad-left-sm"> 
-                {{item.title}} <small> {{item.description}} </small> 
-            </h4>
-            <span flex></span>
-            <md-icon>keyboard_arrow_right</md-icon>
-          </div>
-          <md-divider></md-divider>             
-        </ng-template>
-        
-      </md-sidenav>
--->
 
-      <!--
-        main-contents
-        -->
-        
-      <div class="bgc-light-blue-800 tc-grey-50 md-elevation-z1 header">
-          <div flex layout layout-align="center center">
-              <a md-icon-button (click)="sidenav.open()" hide-gt-md><md-icon>dehaze</md-icon></a>
-              <img src="../../../../assets/img/logo_wh_32px.png">
-              <span flex></span>              
-              <a md-icon-button [mdMenuTriggerFor]="notificationsMenu" mdTooltip="Alram" mdTooltipPosition="before">
-                <md-icon>alarm_on</md-icon>
-              </a>
+        <router-outlet></router-outlet>
 
-              <!--
-                Alram menu
-                -->
+        <!--<img src="../../../../assets/img/logo_bn.png">-->
+        </md-sidenav-container>
 
-              <md-menu #notificationsMenu="mdMenu">
-                    <div td-menu-header class="md-subhead">Notifications</div>
-                    <md-nav-list dense>
-                      <ng-template let-last="last" ngFor [ngForOf]="[0,1,2,3,4,5,6,7,8,9]">
-                        <a md-list-item>
-                          <md-icon md-list-avatar>today</md-icon>
-                          <h4 md-line><span class="text-wrap">A user did an activity on an item that you've subscribed to follow actions on.</span></h4>
-                          <p md-line>22 minutes ago</p>
-                        </a>
-                        <md-divider *ngIf="!last"></md-divider>
-                      </ng-template>
-                    </md-nav-list>
-              </md-menu>
+        <div id="webUI" *ngIf="currentPath !== '/' || navMode === 'over'">
+            <a [routerLink]="[currentPath]" fragment="top"><md-icon>arrow_upward</md-icon></a>
+        </div>
 
-              <a md-icon-button mdTooltip="Logout" mdTooltipPosition="before" [routerLink]="('/login')"><md-icon>lock_open</md-icon></a>
-
-          </div>
-      </div>
-      <router-outlet></router-outlet>   
-<!--
-    </md-sidenav-container>
--->
-  </div>
-</div>
